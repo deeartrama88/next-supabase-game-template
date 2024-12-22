@@ -7,7 +7,7 @@ export default async function Page() {
   return (
     <div className="flex-1 w-full flex flex-col gap-12">
       <div className="w-full">
-        <h1 className="text-2xl font-medium">Notes (server component)</h1>
+        <h1 className="text-2xl font-medium">Notes (server component 2)</h1>
       </div>
       <div className="w-full">
         <pre>{JSON.stringify(notes, null, 2)}</pre>
