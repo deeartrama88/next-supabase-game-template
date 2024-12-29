@@ -1,4 +1,6 @@
+import ReduxCounter from '@/components/testComponents/ReduxCounter';
 import { createClient } from '@/utils/supabase/server'
+
 
 export default async function Page() {
   const supabase = await createClient()
@@ -11,6 +13,9 @@ export default async function Page() {
       </div>
       <div className="w-full">
         <pre>{JSON.stringify(notes, null, 2)}</pre>
+      </div>
+      <div>
+        <ReduxCounter />
       </div>
     </div>
   );
