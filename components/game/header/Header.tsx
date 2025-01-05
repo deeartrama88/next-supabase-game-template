@@ -1,7 +1,7 @@
 'use client';
 
 import { Box } from '@mui/material';
-import { colors } from '@/lib/theme-provider';
+import { colors } from '@/lib/theme/colors';
 
 const Header = () => {
   return (

@@ -3,7 +3,7 @@
 import { Geist } from 'next/font/google';
 import { AppProvider } from '@/lib/app-provider';
 import { Box } from '@mui/material';
-import { colors } from '@/lib/theme-provider';
+import { colors } from '@/lib/theme/colors';
 import Header from '../game/header/Header';
 import Footer from '../game/footer/Footer';
 
@@ -47,7 +47,9 @@ export default function GameLayout({ children }: Props) {
                 flexDirection="column"
               >
                 <Header />
-                <Box flex={1}>{children}</Box>
+                <Box flex={1} overflow={'auto'}>
+                  {children}
+                </Box>
                 <Footer />
               </Box>
             </Box>
