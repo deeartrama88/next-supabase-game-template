@@ -1,10 +1,10 @@
 import { createModel } from '@rematch/core';
 import type { RootModel } from './index';
-import { UserDetails, UserState } from '../types/user';
+import { UserDetails, UserState } from '@/types/game/user';
 
 export const user = createModel<RootModel>()({
   state: {
-        details: null,
+    details: null,
   } as UserState,
   reducers: {
     updateUser(state, payload: UserDetails) {
@@ -14,4 +14,4 @@ export const user = createModel<RootModel>()({
       };
     },
   },
-}); 
+});

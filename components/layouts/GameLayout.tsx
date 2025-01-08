@@ -40,14 +40,55 @@ export default function GameLayout({ children }: Props) {
               }}
             >
               <Box
-                bgcolor={colors.background.default}
-                height="100vh"
-                overflow={'auto'}
+                height="100dvh"
                 display="flex"
+                bgcolor={colors.background.default}
+                overflow={'auto'}
+                position="relative"
                 flexDirection="column"
               >
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    left: 0,
+                    paddingTop: '14px',
+                    paddingBottom: '14px',
+                    width: '10px',
+                    height: '100dvh',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      backgroundImage: 'url(/images/side_1.png)',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: '100% 100%',
+                      height: '100%',
+                      width: '100%',
+                    }}
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    right: 0,
+                    paddingTop: '14px',
+                    paddingBottom: '14px',
+                    width: '10px',
+                    height: '100dvh',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      backgroundImage: 'url(/images/side_2.png)',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: '100% 100%',
+                      height: '100%',
+                      width: '100%',
+                    }}
+                  />
+                </Box>
                 <Header />
-                <Box flex={1} overflow={'auto'}>
+                <Box flex={1} overflow={'auto'} px={2}>
                   {children}
                 </Box>
                 <Footer />

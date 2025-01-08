@@ -5,7 +5,16 @@ import { colors } from '@/lib/theme/colors';
 
 const Header = () => {
   return (
-    <Box p={1} borderBottom={'1px solid'} borderColor={colors.background.paper}>
+    <Box
+      sx={{
+        height: '60px',
+        backgroundImage: 'url(/images/header.png)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100% 100%',
+        padding: '18px',
+        textAlign: 'center',
+      }}
+    >
       Header
     </Box>
   );
