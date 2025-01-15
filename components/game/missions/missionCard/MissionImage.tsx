@@ -9,7 +9,7 @@ type Props = {
 
 export default function MissionImage({ imageUrl }: Props) {
   return (
-    <Box sx={{ position: 'relative', height: 150 }}>
+    <Box sx={{ position: 'relative', height: 100 }}>
       <Image
         src={imageUrl}
         alt={'mission image'}

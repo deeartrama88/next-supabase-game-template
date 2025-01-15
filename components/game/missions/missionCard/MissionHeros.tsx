@@ -12,16 +12,32 @@ type Props = {
 
 export default function MissionHeros({ heroes }: Props) {
   return (
-    <Stack direction="row" spacing={1} sx={{ mb: 2 }} alignItems="center">
+    <Stack direction="row" spacing={1}>
       {heroes?.map((hero) => (
-        <Box key={hero.id} width={`${SLOT_SIZE}px`} height={`${SLOT_SIZE}px`} position="relative">
-          <Image
-            src={hero.avatar_url}
-            alt={'hero avatar'}
-            fill
-            priority
-            sizes={`(max-width: 425px) ${SLOT_SIZE}px, ${SLOT_SIZE}px`}
-          />
+        <Box
+          key={hero.id}
+          sx={{
+            backgroundSize: '100% 100%',
+            backgroundImage: `url(/images/portrait_frame.png)`,
+            backgroundRepeat: 'no-repeat',
+            padding: '8px',
+          }}
+        >
+          <Box
+            width={`${SLOT_SIZE}px`}
+            height={`${SLOT_SIZE}px`}
+            position="relative"
+            borderRadius="20px"
+            overflow="hidden"
+          >
+            <Image
+              src={hero.avatar_url}
+              alt={'hero avatar'}
+              fill
+              priority
+              sizes={`(max-width: 425px) ${SLOT_SIZE}px, ${SLOT_SIZE}px`}
+            />
+          </Box>
         </Box>
       ))}
     </Stack>

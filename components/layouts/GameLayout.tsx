@@ -43,54 +43,43 @@ export default function GameLayout({ children }: Props) {
                 height="100dvh"
                 display="flex"
                 bgcolor={colors.background.default}
-                overflow={'auto'}
+                overflow={'hidden'}
                 position="relative"
                 flexDirection="column"
               >
+                {/* main frame left side bg image */}
                 <Box
                   sx={{
-                    position: 'absolute',
-                    left: 0,
-                    paddingTop: '14px',
-                    paddingBottom: '14px',
-                    width: '10px',
+                    left: '-4px',
+                    width: '24px',
                     height: '100dvh',
+                    position: 'absolute',
+                    backgroundSize: '100% 100%',
+                    backgroundImage: 'url(/images/main-frame_side_1.png)',
+                    backgroundRepeat: 'no-repeat',
                   }}
-                >
-                  <Box
-                    sx={{
-                      backgroundImage: 'url(/images/side_1.png)',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundSize: '100% 100%',
-                      height: '100%',
-                      width: '100%',
-                    }}
-                  />
-                </Box>
+                />
+                {/* main frame right side bg image */}
                 <Box
                   sx={{
-                    position: 'absolute',
-                    right: 0,
-                    paddingTop: '14px',
-                    paddingBottom: '14px',
-                    width: '10px',
+                    right: '-3px',
+                    width: '24px',
                     height: '100dvh',
+                    position: 'absolute',
+                    backgroundSize: '100% 100%',
+                    backgroundImage: 'url(/images/main-frame_side_2.png)',
+                    backgroundRepeat: 'no-repeat',
                   }}
-                >
-                  <Box
-                    sx={{
-                      backgroundImage: 'url(/images/side_2.png)',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundSize: '100% 100%',
-                      height: '100%',
-                      width: '100%',
-                    }}
-                  />
-                </Box>
+                />
+                {/* header */}
                 <Header />
+
+                {/* main content */}
                 <Box flex={1} overflow={'auto'} px={2}>
                   {children}
                 </Box>
+
+                {/* footer */}
                 <Footer />
               </Box>
             </Box>

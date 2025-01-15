@@ -9,7 +9,6 @@ export default async function MissionsPage() {
 
   return (
     <Box p={1}>
-      <h1>Missions</h1>
       <Stack direction="column" spacing={3}>
         {missions?.map((mission) => <MissionCard key={mission.id} mission={mission} />)}
       </Stack>

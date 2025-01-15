@@ -1,7 +1,7 @@
 'use client';
 
 import { colors } from '@/lib/theme/colors';
-import { LinearProgress } from '@mui/material';
+import { Box, LinearProgress } from '@mui/material';
 
 type Props = {
   health: number;
@@ -9,17 +9,15 @@ type Props = {
 
 export default function MissionProgress({ health }: Props) {
   return (
-    <LinearProgress
-      variant="determinate"
-      value={health}
+    <Box
       sx={{
-        height: 8,
-        borderRadius: 4,
-        bgcolor: colors.background.default,
-        '& .MuiLinearProgress-bar': {
-          bgcolor: colors.green.main,
-        },
+        height: '15px',
+        backgroundSize: '100% 100%',
+        backgroundImage: `url(/images/mission_progress_bar.png)`,
+        backgroundRepeat: 'no-repeat',
       }}
-    />
+    >
+      {/* <LinearProgress variant="determinate" value={health} /> */}
+    </Box>
   );
 }

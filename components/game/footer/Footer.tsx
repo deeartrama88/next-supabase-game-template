@@ -5,21 +5,35 @@ export default function Footer() {
   return (
     <Box
       sx={{
-        height: '21vw',
+        width: '100%',
+        height: '56px',
         display: 'flex',
-        padding: '0 10px',
-        maxHeight: '88px',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        backgroundSize: '100% auto',
-        backgroundImage: `url(/images/footer.png)`,
+        justifyContent: 'center',
+        backgroundSize: '100%',
+        backgroundImage: `url(/images/footer_bg.png)`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'bottom',
       }}
     >
-      <NavigationButton href="/missions" image="/images/navigation/battle.png" />
-      <NavigationButton href="/wallet" image="/images/navigation/wallet.png" />
-      <NavigationButton href="/squad" image="/images/navigation/squad.png" />
-      <NavigationButton href="/talents" image="/images/navigation/talents.png" />
-      <NavigationButton href="/shop" image="/images/navigation/shop.png" />
+      <Box
+        sx={{
+          gap: '25px',
+          width: '320px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundSize: 'cover',
+          backgroundImage: `url(/images/footer_main.png)`,
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+        }}
+      >
+        <NavigationButton href="/missions" image="/images/battle.png" />
+        <NavigationButton href="/wallet" image="/images/wallet.png" />
+        <NavigationButton href="/squad" image="/images/squad.png" />
+        <NavigationButton href="/talents" image="/images/talents.png" />
+        <NavigationButton href="/shop" image="/images/shop.png" />
+      </Box>
     </Box>
   );
 }

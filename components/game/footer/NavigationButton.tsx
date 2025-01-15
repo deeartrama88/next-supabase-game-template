@@ -22,7 +22,7 @@ const NavigationButton = ({ href, image }: NavigationButtonProps) => {
       }}
     >
       <NextLink href={href}>
-        <Image src={image} alt={image} width={40} height={40} priority />
+        <Image src={image} alt={image} width={30} height={30} priority />
       </NextLink>
     </Box>
   );
