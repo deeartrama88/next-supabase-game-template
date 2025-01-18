@@ -7,6 +7,7 @@ import MissionContent from './MissionContent';
 import MissionRewards from './MissionRewards';
 import MissionFrameImages from './MissionFrameImages';
 import MissionImageDivider from './MissionImageDivider';
+import { MissionCardProvider } from './MissionCardContext';
 
 interface Props {
   mission: Mission;
@@ -14,12 +15,14 @@ interface Props {
 
 export default function MissionCard({ mission }: Props) {
   return (
-    <Box position="relative">
-      <MissionImage imageUrl={mission.image_url} />
-      <MissionImageDivider />
-      <MissionContent mission={mission} />
-      <MissionRewards mission={mission} />
-      <MissionFrameImages />
-    </Box>
+    <MissionCardProvider mission={mission}>
+      <Box position="relative">
+        <MissionImage />
+        <MissionImageDivider />
+        <MissionContent />
+        <MissionRewards />
+        <MissionFrameImages />
+      </Box>
+    </MissionCardProvider>
   );
 }

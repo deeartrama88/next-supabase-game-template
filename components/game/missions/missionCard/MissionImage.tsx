@@ -2,21 +2,19 @@
 
 import { Box } from '@mui/material';
 import Image from 'next/image';
+import { useMissionCard } from './MissionCardContext';
 
-type Props = {
-  imageUrl: string;
-};
+export default function MissionImage() {
+  const { mission } = useMissionCard();
 
-export default function MissionImage({ imageUrl }: Props) {
   return (
-    <Box sx={{ position: 'relative', height: 100 }}>
+    <Box position="relative" height={150}>
       <Image
-        src={imageUrl}
-        alt={'mission image'}
+        src={mission.image_url}
+        alt="Mission"
         fill
-        sizes="(max-width: 425px) 100vw, 50vw"
-        priority
         style={{ objectFit: 'cover' }}
+        sizes="800px"
       />
     </Box>
   );

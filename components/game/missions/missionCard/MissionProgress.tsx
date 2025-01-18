@@ -4,7 +4,7 @@ import { colors } from '@/lib/theme/colors';
 import { Box, LinearProgress } from '@mui/material';
 
 type Props = {
-  health: number;
+  health?: number;
 };
 
 export default function MissionProgress({ health }: Props) {

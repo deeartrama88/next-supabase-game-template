@@ -1,11 +1,9 @@
-import { Mission } from '@/types/game/mission';
-import { Box, LinearProgress } from '@mui/material';
+import { Box } from '@mui/material';
+import { useMissionCard } from './MissionCardContext';
 
-type Props = {
-  mission: Mission;
-};
+export default function MissionRewards() {
+  const { mission } = useMissionCard();
 
-const MissionRewards = ({ mission }: Props) => {
   return (
     <Box
       sx={{
@@ -19,6 +17,4 @@ const MissionRewards = ({ mission }: Props) => {
       {/* <LinearProgress variant="determinate" value={mission.health} /> */}
     </Box>
   );
-};
-
-export default MissionRewards;
+}

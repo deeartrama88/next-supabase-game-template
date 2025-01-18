@@ -4,7 +4,7 @@ export type Hero = {
   id: string;
   name: string;
   health: number;
-  attack: number;
+  damage: number;
   status: HeroStatus;
   defense: number;
   accuracy: number;

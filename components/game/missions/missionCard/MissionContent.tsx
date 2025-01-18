@@ -1,16 +1,12 @@
 import { Box, Stack } from '@mui/material';
-import { Mission } from '@/types/game/mission';
-import MissionHeros from './MissionHeros';
-import MissionBoosts from './MissionBoosts';
+import MissionHeros from './heros/MissionHeros';
+import MissionBoosts from './boosts/MissionBoosts';
+
 import MissionButton from './MissionButton';
 import MissionProgress from './MissionProgress';
 import MissionContentDescription from './MissionContentDescription';
 
-type Props = {
-  mission: Mission;
-};
-
-const MissionContent = ({ mission }: Props) => {
+const MissionContent = () => {
   return (
     <Box
       sx={{
@@ -19,19 +15,19 @@ const MissionContent = ({ mission }: Props) => {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <MissionContentDescription description={mission.description} />
+      <MissionContentDescription />
       <Stack direction="row" gap={1}>
         <Box flex={1} alignItems={'center'} display={'flex'} justifyContent={'center'}>
-          <MissionHeros heroes={mission.heroes} />
+          <MissionHeros />
         </Box>
         <Box flex={1} alignItems={'center'} display={'flex'} justifyContent={'center'}>
           <MissionButton />
         </Box>
         <Box flex={1} alignItems={'center'} display={'flex'} justifyContent={'center'}>
-          <MissionBoosts boosts={mission.boosts} />
+          <MissionBoosts />
         </Box>
       </Stack>
-      <MissionProgress health={mission.health} />
+      <MissionProgress />
     </Box>
   );
 };

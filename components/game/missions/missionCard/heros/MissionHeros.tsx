@@ -1,14 +1,14 @@
 'use client';
 
-import { Hero } from '@/types/game/heroes';
 import { Box } from '@mui/material';
 import MissionHeroAvatar from './MissionHeroAvatar';
 import MissionAddHerosButton from './MissionAddHerosButton';
-type Props = {
-  heroes: Hero[];
-};
+import { useMissionCard } from '../MissionCardContext';
 
-const MissionHeros = ({ heroes }: Props) => {
+const MissionHeros = () => {
+  const { mission } = useMissionCard();
+  const heroes = mission?.heroes || [];
+
   if (heroes.length === 0) {
     // layout for add button
     return <MissionAddHerosButton size="40px" />;
