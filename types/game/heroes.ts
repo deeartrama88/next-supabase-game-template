@@ -11,4 +11,5 @@ export type Hero = {
   avatar_url: string;
   crit_chance: number;
   description: string;
+  active_mission_id?: string;
 };

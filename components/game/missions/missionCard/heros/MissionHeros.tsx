@@ -19,7 +19,7 @@ const MissionHeros = () => {
     return (
       <Box display={'flex'} alignItems={'center'} width={'60px'}>
         <MissionHeroAvatar hero={heroes[0]} />
-        <Box position={'relative'} left={'-24px'}>
+        <Box>
           <MissionAddHerosButton />
         </Box>
       </Box>

@@ -2,6 +2,10 @@ export const colors = {
   background: {
     default: '#222831',
     paper: '#31363F',
+    actionBg: '#1a2027',
+    actionBgDisabled: '#28323e',
+    actionIconBg: '#13171e',
+    actionIconBgDisabled: '#181d26',
   },
   blue: {
     main: '#677D6A',
