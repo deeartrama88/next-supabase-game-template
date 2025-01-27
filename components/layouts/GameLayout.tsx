@@ -6,6 +6,7 @@ import { Box } from '@mui/material';
 import { colors } from '@/lib/theme/colors';
 import Header from '../game/header/Header';
 import Footer from '../game/footer/Footer';
+import '@near-wallet-selector/modal-ui/styles.css';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`

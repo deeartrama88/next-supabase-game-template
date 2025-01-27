@@ -5,132 +5,66 @@ import { HelloNearContract } from '@/wallets/config';
 import { useContext, useState, useEffect } from 'react';
 import { Stack, Typography, Button, Box, Divider } from '@mui/material';
 import { colors } from '@/lib/theme/colors';
-
-// Contract that the app will interact with
-const CONTRACT = HelloNearContract;
+import { walletApi, nftContractApi, checkNFTOwnershipRPC } from '@/wallets/web3api';
 
 const Shop = () => {
-  const { signedAccountId, wallet } = useContext(NearContext);
+  // const { signedAccountId, wallet } = useContext(NearContext);
   const [loggedIn, setLoggedIn] = useState(false);
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoggedIn(!!signedAccountId);
-  }, [signedAccountId]);
+    setLoggedIn(walletApi.accountId ? true : false);
+  }, [walletApi.accountId]);
 
   const handleConnectWallet = async () => {
     if (loggedIn) {
-      await wallet.signOut();
+      await walletApi.wallet.signOut().then(() => {
+        setLoggedIn(false);
+      });
     } else {
-      await wallet.signIn();
+      await walletApi.signInModal();
     }
   };
 
   const fetchNFTs = async () => {
-    if (!signedAccountId) {
-      alert('Please login first');
-      return;
-    }
-
-    setLoading(true);
     try {
-      // Fetch NFT contracts that the account has interacted with
-      const result = await wallet.viewMethod({
-        contractId: CONTRACT,
-        method: 'nft_tokens_for_owner',
-        args: {
-          account_id: signedAccountId,
-        },
+      const response = await nftContractApi.view('nft_tokens', {
+        from_index: '0',
+        limit: 50,
       });
-      console.log(result);
-
-      setNfts(result);
+      setNfts(response || []);
     } catch (error) {
-      console.error('Error fetching NFTs:', error);
-      alert('Error fetching NFTs. Please try again.');
-    } finally {
-      setLoading(false);
+      console.error('Error:', error);
     }
   };
 
   const getAccountData = async () => {
-    const accountData = await wallet.getAccountData(signedAccountId);
-    console.log(accountData);
+    console.log(walletApi);
   };
 
-  const checkNFTOwnership = async (tokenId) => {
-    if (!signedAccountId) {
-      alert('Please login first');
-      return false;
-    }
-
-    try {
-      const token = await wallet.viewMethod({
-        contractId: CONTRACT,
-        method: 'nft_token',
-        args: {
-          token_id: tokenId,
-        },
-      });
-
-      // Check if token exists and belongs to the signed account
-      return token && token.owner_id === signedAccountId;
-    } catch (error) {
-      console.error('Error checking NFT ownership:', error);
-      return false;
-    }
-  };
-
-  const checkNFTOwnershipRPC = async (accountId, tokenId) => {
-    try {
-      const response = await fetch('https://rpc.testnet.near.org', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          jsonrpc: '2.0',
-          id: 'dontcare',
-          method: 'query',
-          params: {
-            request_type: 'call_function',
-            finality: 'final',
-            account_id: CONTRACT,
-            method_name: 'nft_token',
-            args_base64: Buffer.from(JSON.stringify({ token_id: tokenId })).toString('base64'),
-          },
-        }),
-      });
-
-      const result = await response.json();
-      if (result.error) {
-        throw new Error(result.error.message);
-      }
-
-      // Parse the result from base64
-      const token = JSON.parse(Buffer.from(result.result.result).toString());
-      return token && token.owner_id === accountId;
-    } catch (error) {
-      console.error('Error checking NFT ownership via RPC:', error);
-      return false;
-    }
+  const checkNFTOwnership = async (tokenId = 'token-1') => {
+    const tokens = await nftContractApi.view('nft_tokens');
+    const token = tokens.find((token) => token.token_id === 'token-1');
+    const isOwner = token && token.owner_id === walletApi.accountId;
+    console.log(isOwner);
+    return isOwner;
   };
 
   const handleCheckNFTRPC = async () => {
-    const accountToCheck = 'denthai2.testnet';
-    const tokenToCheck = 'token-1';
-    const hasNFT = await checkNFTOwnershipRPC(accountToCheck, tokenToCheck);
-    console.log(
-      `Account ${accountToCheck} ${hasNFT ? 'owns' : 'does not own'} NFT ${tokenToCheck}`
-    );
+    const tokenId = 'token-1';
+    const token = await checkNFTOwnershipRPC(tokenId);
+
+    if (token) {
+      console.log(`Token owner: ${token.owner_id}`);
+      console.log(`Is owned by current account: ${token.owner_id === walletApi.accountId}`);
+    } else {
+      console.log(`Token ${tokenId} not found`);
+    }
   };
 
   // Example usage
-  const handleCheckNFT = async (tokenId) => {
-    const hasNFT = await checkNFTOwnership(tokenId);
-    console.log(`User ${hasNFT ? 'owns' : 'does not own'} NFT ${tokenId}`);
-  };
+  const handleCheckNFT = async (tokenId) => {};
 
   return (
     <Stack>
@@ -139,12 +73,12 @@ const Shop = () => {
       </Box>
 
       <Typography variant="body2">
-        {loggedIn ? `Connected to ${signedAccountId}` : 'Connect wallet'}
+        {loggedIn ? `Connected to ${walletApi.accountId}` : 'Connect wallet'}
       </Typography>
 
       <Button onClick={fetchNFTs}>Load NFTs</Button>
       <Button onClick={getAccountData}>Get Account Data</Button>
-      <Button onClick={() => handleCheckNFT(nfts[0]?.token_id)}>Check Specific NFT</Button>
+      <Button onClick={checkNFTOwnership}>Check Specific NFT</Button>
       <Button onClick={() => handleCheckNFTRPC()}>Check NFT via RPC</Button>
       {nfts.length > 0 && (
         <>
