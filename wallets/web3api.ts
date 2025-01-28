@@ -1,15 +1,16 @@
 import naxios from '@wpdas/naxios';
 import { HelloNearContract } from './config';
 
-export const walletApi = new naxios({
+const naxiosInstance = new naxios({
+  rpcNodeUrl: 'https://free.rpc.fastnear.com', // optional
   contractId: 'denthai2.testnet',
   network: 'testnet',
-}).walletApi();
+});
 
-export const nftContractApi = new naxios({
+export const walletApi = naxiosInstance.walletApi();
+export const nftContractApi = naxiosInstance.contractApi({
   contractId: 'denthai2.testnet',
-  network: 'testnet',
-}).contractApi();
+});
 
 export const checkNFTOwnershipRPC = async (tokenId: string) => {
   try {

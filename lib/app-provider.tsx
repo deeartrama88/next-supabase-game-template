@@ -9,7 +9,7 @@ import { NearContext, Wallet } from '@/wallets/near';
 import { NetworkId } from '@/wallets/config';
 import { useState, useEffect } from 'react';
 
-// const wallet = new Wallet({ networkId: NetworkId, createAccessKeyFor: '' });
+const wallet = new Wallet({ networkId: NetworkId, createAccessKeyFor: '' });
 
 interface AppProviderProps {
   children: ReactNode;
@@ -18,25 +18,25 @@ interface AppProviderProps {
 export function AppProvider({ children }: AppProviderProps) {
   const [signedAccountId, setSignedAccountId] = useState('');
 
-  // useEffect(() => {
-  //   wallet.startUp(setSignedAccountId);
-  // }, []);
+  useEffect(() => {
+    wallet.startUp(setSignedAccountId);
+  }, []);
 
   return (
-    // <NearContext.Provider value={{ wallet, signedAccountId }}>
-    <ReduxProvider store={store}>
-      <NextThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <MUIThemeProvider>
-          {/* Add other providers here */}
-          {children}
-        </MUIThemeProvider>
-      </NextThemeProvider>
-    </ReduxProvider>
-    // </NearContext.Provider>
+    <NearContext.Provider value={{ wallet, signedAccountId }}>
+      <ReduxProvider store={store}>
+        <NextThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <MUIThemeProvider>
+            {/* Add other providers here */}
+            {children}
+          </MUIThemeProvider>
+        </NextThemeProvider>
+      </ReduxProvider>
+    </NearContext.Provider>
   );
 }
